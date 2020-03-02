@@ -2,7 +2,9 @@
 
 ## Installation
 
-#### Add in `.htaccess`
+#### Upload to apache server
+
+#### Configure `.htaccess`
 ```
 RewriteEngine On
 RewriteBase /
@@ -11,22 +13,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+)$ index.php [QSA,L]
 ```
 > Note: only apache server
-
------
-
-#### Require Router
-```php
-/**
- * Require Router
- */
-require 'Router.php';
-```
-
------
-
-## Use Router
-
-- Clone this repo and `php -S localhost:4000`
 
 -----
 
