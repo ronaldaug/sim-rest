@@ -1,20 +1,13 @@
 # Simple REST API Server
 
 ## Installation
+Upload to apache server and done.
 
-#### Upload to apache server
+## Configure data and credentials
+Configure data and credentials in `/database/` directory
 
-#### Configure `.htaccess`
-```
-RewriteEngine On
-RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.+)$ index.php [QSA,L]
-```
-> Note: only apache server
-
------
+## Configure routes
+Configure routes in `index.php` file
 
 ## Authentication
 ### Get token

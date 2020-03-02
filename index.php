@@ -51,12 +51,6 @@ if($auth->routes()){
           echo json_encode(["data"=>$data]);
           });
 
-          /**
-          * Delete request
-          */
-          $router->delete('/cars/:id',function($id){
-          echo json_encode(["id"=>$id]);
-          });
 
           /**
           * Get by Parameter
