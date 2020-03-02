@@ -1,4 +1,4 @@
-# Single file, light weight, simple PHP router
+# Simple REST API Server
 
 ## Installation
 
