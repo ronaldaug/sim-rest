@@ -2,74 +2,109 @@
 /**
  * Require Router
  */
+
+require 'middleware/Auth.php';
 require 'Router.php';
 require 'elloquent/DB.php';
 
 /**
- * Return Function
+ * Authentication 
+ * payload must include username and password
  */
-$router->get('/',function(){
-  echo "<h1>This is home page</h1>";
+$router->post('/auth',function($payload){
+    $auth = new Auth(null);
+    echo $auth->login($payload);
 });
-
-$router->get('/posts/:id',function($id){
-  $post = DB::table("posts")->where("_id",$id)->get();
-  echo json_encode($post);
-});
-
-$router->get('/posts',function(){
-  $posts = DB::table("posts")->get();
-  echo json_encode($posts);
-});
-
-$router->post('/posts',function($data){
-  $post = DB::table("posts")->save($data);
-  echo json_encode($post);
-});
-
-$router->put('/posts',function($data){
-  $post = DB::table("posts")->save($data);
-  echo json_encode($post);
-});
-
-$router->get('/specific',function(){
-  echo DB::table("cars")->where("description","haha")->get();
-});
-
 
 
 /**
- * Require File
+ * Protect routes with Auth
  */
-$router->get('/about',function(){
-  require __DIR__ . '/views/about.php';
-});
+if($auth->routes()){
 
-/**
- * With parameter
- */
-$router->get('/user/:id',function($id){
-  echo json_encode(["user_id"=>$id]);
-});
+          /**
+           * Return Function
+           */
+          $router->get('/',function(){
+            echo "<h1>This is home page</h1>";
+          });
 
-/**
- *  Post request 
- *  The payload must be JSON format
- */
-$router->post('/',function($data){
-  echo json_encode(["data"=>$data]);
-});
+          /**
+          * Require File
+          */
+          $router->get('/about',function(){
+          require __DIR__ . '/views/about.php';
+          });
 
-/**
- * Delete request
- */
-$router->delete('/cars/:id',function($id){
-  echo json_encode(["id"=>$id]);
-});
+          /**
+          * With parameter
+          */
+          $router->get('/user/:id',function($id){
+          echo json_encode(["user_id"=>$id]);
+          });
+
+          /**
+          *  Post request 
+          *  The payload must be JSON format
+          */
+          $router->post('/', function($data){
+          echo json_encode(["data"=>$data]);
+          });
+
+          /**
+          * Delete request
+          */
+          $router->delete('/cars/:id',function($id){
+          echo json_encode(["id"=>$id]);
+          });
+
+          /**
+          * Get by Parameter
+          */
+          $router->get('/posts/:id',function($id){
+          $post = DB::table("posts")->where("_id",$id)->get();
+          echo json_encode($post);
+          });
+
+          /**
+          * Get all posts
+          */
+          $router->get('/posts',function(){
+          $posts = DB::table("posts")->all();
+          echo json_encode($posts);
+          });
+
+          /**
+          * Save to post
+          */
+          $router->post('/posts',function($data){
+          $post = DB::table("posts")->save($data);
+          echo json_encode($post);
+          });
+
+          /**
+          * Delete request
+          */
+          $router->delete('/posts/:id',function($id){
+          $posts = DB::table("posts")->delete($id);
+          echo json_encode($posts);
+          });
+
+          /**
+          * Put request
+          */
+          $router->put('/posts',function($data){
+          $post = DB::table("posts")->save($data);
+          echo json_encode($post);
+          });
+
+}
+
+
 
 /**
  * If 404 not found
  */
 $router->notFound(function(){
-    require __DIR__ . '/views/404.php';
+   echo json_encode(["status"=>401,"message"=>"unauthorized"]);
 });

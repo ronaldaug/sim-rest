@@ -13,7 +13,7 @@ class Table{
     public function __construct($table){
         $this->table = $table;
         ob_start();
-        require_once "database/".$table.'.php';
+        require_once "database/collections/".$table.'.php';
         $raw = ob_get_clean();
         $this->collection = json_decode($raw)->$table;
     }
@@ -32,7 +32,7 @@ class Table{
      * Get collection
      * @return mixed
      */
-    public function get(){
+    public function all(){
         return $this->collection;
     }
 
@@ -42,6 +42,9 @@ class Table{
      * @return mixed
      */
     public function save($data){
+        if(empty($data)){
+            return ["status"=>400,"message"=>"Please provide data!"];
+        }
         $id = $data["_id"];
         if(!empty($id)){
             return $this->update($id,$data);
@@ -80,7 +83,21 @@ class Table{
 
         }
     
-        $newData->posts = !empty($this->mapped)?$this->mapped:$this->collection;
+        $content = !empty($this->mapped)?$this->mapped:$this->collection;
+
+        $this->appendInCollection($content);
+
+        return $data;
+    }
+
+    /**
+     * Append in database collection
+     * @param array
+     * @return void
+     */
+    public function appendInCollection($data){
+
+        $newData->posts = $data;
 
         // Append array
         $head = "<?php 
@@ -90,8 +107,7 @@ class Table{
 
         $append = $head."\n".json_encode($newData,JSON_PRETTY_PRINT);
 
-        file_put_contents("database/$this->table.php",$append);
-        return $data;
+        file_put_contents("database/collections/$this->table.php",$append);
     }
 
     /**
@@ -120,5 +136,25 @@ class Table{
         }
 
         return false;
+    }
+
+    /**
+     * @param id
+     * @return mixed
+     */
+    function delete($id)
+    {
+        $filtered = array_filter($this->collection, function($item) use($id) {
+            return $item->_id !== $id;
+        });
+
+        $this->appendInCollection($filtered);
+
+        if(count($this->collection) !== count($filtered)){
+            return "delete!";
+        }else{
+            return "failed to delete!";
+        }
+
     }
 }
