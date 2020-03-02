@@ -151,9 +151,9 @@ class Table{
         $this->appendInCollection($filtered);
 
         if(count($this->collection) !== count($filtered)){
-            return json_encode(["status"=>200,"message"=>"deleted!"]);
+            return ["status"=>200,"message"=>"deleted!"];
         }else{
-            return json_encode(["status"=>400,"message"=>"failed to delete!"]);
+            return ["status"=>400,"message"=>"failed to delete!"];
         }
 
     }
