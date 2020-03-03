@@ -27,7 +27,7 @@ headers:{
 
 ## Example
 
-check [index.php](https://github.com/ronaldaug/router/blob/master/index.php)
+check [index.php](https://github.com/ronaldaug/simple-rest/blob/master/index.php)
 
 ```php
 <?php
