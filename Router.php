@@ -1,9 +1,4 @@
 <?php
-/**
- * Light weight, simple PHP router
- * Author : Ronald Aug 
- * Link : https://github.com/ronaldaug/router
- */
 
 class Router{
     
@@ -133,21 +128,6 @@ class Router{
                 break;
             default:
                 break;
-        }
-    }
-
-    /**
-    * NOT FOUND
-    * @param func
-    * @return mixed
-    */
-    public function notFound($func){
-        if($this->method !== "GET"){
-            return;
-        }
-        if(in_array(explode("/",$this->route)[1],$this->routes) == false){
-            http_response_code(404);
-            $func();
         }
     }
 

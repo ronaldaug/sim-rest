@@ -43,7 +43,7 @@ class Table{
      */
     public function save($data){
         if(empty($data)){
-            return ["status"=>400,"message"=>"Please provide data!"];
+            return Helper::response(400,"Please provide data.",null);
         }
         $id = $data["_id"];
         if(!empty($id)){
@@ -151,9 +151,9 @@ class Table{
         $this->appendInCollection($filtered);
 
         if(count($this->collection) !== count($filtered)){
-            return ["status"=>200,"message"=>"deleted!"];
+            return Helper::response(200,"deleted.",null);
         }else{
-            return ["status"=>400,"message"=>"failed to delete!"];
+            return Helper::response(400,"failed to delete.",null);
         }
 
     }

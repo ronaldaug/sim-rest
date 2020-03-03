@@ -138,7 +138,7 @@ if($auth->routes()){
  * If 404 not found
  */
 $router->notFound(function(){
-   echo json_encode(["status"=>401,"message"=>"unauthorized"]);
+   return Helper::response(401,"unauthorized",null);
 });
 ```
 

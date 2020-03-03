@@ -3,6 +3,7 @@
  * Require Router
  */
 
+require 'Helper.php';
 require 'middleware/Auth.php';
 require 'Router.php';
 require 'elloquent/DB.php';
@@ -93,12 +94,3 @@ if($auth->routes()){
           });
 
 }
-
-
-
-/**
- * If 404 not found
- */
-$router->notFound(function(){
-   echo json_encode(["status"=>401,"message"=>"unauthorized"]);
-});

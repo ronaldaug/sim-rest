@@ -41,10 +41,10 @@ class Auth{
         });
 
         if(empty($filtered)){
-            return json_encode(["status"=>401,"message"=>"Invalid username or password!"]);
+            return Helper::response(401,"Invalid username or password.",null);
         }
         
-        return json_encode(["status"=>200,"token"=>$this->generateToken($payload)]);
+        return Helper::response(200,"Token generated.",["token"=>$this->generateToken($payload)]);
     }
 
     public function generateToken($payload){
@@ -93,9 +93,15 @@ class Auth{
      * Protect Route with Auth
      */
     public function routes(){
-        if(!$this->check($this->token)){
-            return false;
+
+        if(empty($this->token)){
+            return Helper::response(401,"No token is provided.",null);
         }
+
+        if(!$this->check($this->token)){
+            return Helper::response(401,"Unauthenticated.",null);
+        }
+        
         return true;
     }
 
