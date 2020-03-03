@@ -96,8 +96,8 @@ class Table{
      * @return void
      */
     public function appendInCollection($data){
-
-        $newData->posts = $data;
+        $collname = $this->table;
+        $newData->$collname = $data;
 
         // Append array
         $head = "<?php 
