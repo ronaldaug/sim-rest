@@ -144,9 +144,12 @@ class Table{
      */
     function delete($id)
     {
-        $filtered = array_filter($this->collection, function($item) use($id) {
-            return $item->_id !== $id;
-        });
+        $filtered = [];
+        foreach($this->collection as $item){
+            if($item->_id !== $id){
+                array_push($filtered,$item);
+            }
+        }
 
         $this->appendInCollection($filtered);
 
