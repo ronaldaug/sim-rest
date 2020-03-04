@@ -3,13 +3,32 @@
 ## Installation
 Upload to apache server and done.
 
+--------
+
 ## Configure data and credentials
 Configure data and credentials in `/database/` directory
+
+--------
 
 ## Configure routes
 Configure routes in `index.php` file
 
+--------
+
 ## Authentication
+
+### Account Credentials
+Change the credentials in `database/config.php`
+
+```json
+    {
+            "username": "admin",
+            "password": "123456",
+            "token": "this_token_will_auto_generate_when_authenticate",
+            "_updated": 1583296916
+    },
+```
+
 ### Get token
 Send authentication request to `/auth` route
 ```
@@ -24,6 +43,8 @@ headers:{
   "Token": TOKEN_STRING
 }
 ```
+
+--------
 
 ## Example
 
@@ -141,6 +162,8 @@ $router->notFound(function(){
    return Helper::response(401,"unauthorized",null);
 });
 ```
+
+--------
 
 > Enjoy!
 
