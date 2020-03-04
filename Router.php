@@ -131,6 +131,20 @@ class Router{
         }
     }
 
+    /**
+    * NOT FOUND
+    * @param func
+    * @return mixed
+    */
+    public function notFound($func){
+        if($this->method !== "GET"){
+            return;
+        }
+        if(in_array(explode("/",$this->route)[1],$this->routes) == false){
+            http_response_code(404);
+            $func();
+        }
+    }
 }
 
 /** 

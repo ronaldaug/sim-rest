@@ -94,12 +94,8 @@ class Auth{
      */
     public function routes(){
 
-        if(empty($this->token)){
-            return Helper::response(401,"No token is provided.",null);
-        }
-
         if(!$this->check($this->token)){
-            return Helper::response(401,"Unauthenticated.",null);
+            return false;
         }
         
         return true;

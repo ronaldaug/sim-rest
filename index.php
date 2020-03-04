@@ -17,6 +17,12 @@ $router->post('/auth',function($payload){
     echo $auth->login($payload);
 });
 
+/**
+* Require File
+*/
+$router->get('/about',function(){
+  require __DIR__ . '/views/about.php';
+});
 
 /**
  * Protect routes with Auth
@@ -28,13 +34,6 @@ if($auth->routes()){
            */
           $router->get('/',function(){
             echo "<h1>This is home page</h1>";
-          });
-
-          /**
-          * Require File
-          */
-          $router->get('/about',function(){
-          require __DIR__ . '/views/about.php';
           });
 
           /**
@@ -81,8 +80,7 @@ if($auth->routes()){
           * Delete request
           */
           $router->delete('/posts/:id',function($id){
-          $posts = DB::table("posts")->delete($id);
-          echo json_encode($posts);
+             DB::table("posts")->delete($id);
           });
 
           /**
@@ -94,3 +92,8 @@ if($auth->routes()){
           });
 
 }
+
+
+$router->notFound(function(){
+  return Helper::response(401,"Unauthenticated.",null);
+});
