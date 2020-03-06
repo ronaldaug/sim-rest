@@ -8,7 +8,7 @@ class Auth{
     public $token;
 
     public function __construct($token){
-        $this->token = $token;
+        $this->token = explode(" ",$token)[1];
     }
     
     public function check($token){
@@ -48,8 +48,8 @@ class Auth{
     }
 
     public function generateToken($payload){
-
-        $payload["token"] = bin2hex(openssl_random_pseudo_bytes(32));
+        $token = base64_encode(bin2hex(openssl_random_pseudo_bytes(100)));
+        $payload["token"] = $token;
         $updatedToken = array_map(function ($admin) use ($payload) {
             if($admin->username == $payload["username"]){
                 $payload["_updated"] = time();
@@ -103,4 +103,4 @@ class Auth{
 
 }
 
-$auth = new Auth($_SERVER['HTTP_TOKEN']);
+$auth = new Auth($_SERVER['HTTP_AUTHORIZATION']);
