@@ -65,7 +65,7 @@ require 'elloquent/DB.php';
  * payload must include username and password
  */
 $router->post('/auth',function($payload){
-    $auth = new Auth(null);
+    $auth = new Auth();
     echo $auth->login($payload);
 });
 

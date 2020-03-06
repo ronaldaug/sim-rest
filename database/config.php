@@ -7,8 +7,8 @@
         {
             "username": "admin",
             "password": "testing",
-            "token": "e18389c1ba727d72254819b55740e28d24291caf7aa678286339ce39916fdfb6",
-            "_updated": 1583296916
+            "token": "ZWU4MDdhZDBhOTYxMTJiNGM5Y2Q1NzA2NWJiZGY3ZWZjZWI3ZjgzZWJlZTFmZDBmNWNmNmVlZTI3MDY4Y2FhOWQzODZjNzlhODI0MjE0ZGQ1MjE2Mjc3NGE1ZmM1ZDVhOWFhZGFhNDdhYjE2M2ExYmFmOTJkMDVkNjQ5NTMwNTk1ODQ1Zjk4YjRmYjU5MDdiNDZjOGM3YTFmNDI5MDZhMjJlMzIzNTU2OWRjNzgzZDI0ZmZjNDQwOTg4MjAwZTIzMzFkY2JhYmQ=",
+            "_updated": 1583504027
         },
         {
             "username": "zawzaw",
