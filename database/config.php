@@ -7,12 +7,13 @@
         {
             "username": "admin",
             "password": "testing",
-            "token": "ZWU4MDdhZDBhOTYxMTJiNGM5Y2Q1NzA2NWJiZGY3ZWZjZWI3ZjgzZWJlZTFmZDBmNWNmNmVlZTI3MDY4Y2FhOWQzODZjNzlhODI0MjE0ZGQ1MjE2Mjc3NGE1ZmM1ZDVhOWFhZGFhNDdhYjE2M2ExYmFmOTJkMDVkNjQ5NTMwNTk1ODQ1Zjk4YjRmYjU5MDdiNDZjOGM3YTFmNDI5MDZhMjJlMzIzNTU2OWRjNzgzZDI0ZmZjNDQwOTg4MjAwZTIzMzFkY2JhYmQ=",
-            "_updated": 1583504027
+            "token": "MTAxMDAyZjc0OGM4OTkwYjBmZjhkOTE3YjY1OGQzNThkNDQ5ZjhhZTY2ZjM3NDQ2MzM4MGFkODY4YjY4NDQzMzdmY2U1NzI2YTc3MDcxNTQ0NmM2MGI4ZGZhMGFmZGVjNDE2ZGE4MDUzOGFkMjM3MTlhODkzMDg0YTZhZGNiZjkzZDAzYjlkZTNjMmI1YzFkMWNjYzY5M2YzNjY2ODMzYzYzODNjZTUxNWM5YmRiNDk1OTU5ZGJjYmNjNzBhMzVmZTJmMWE4MmY=",
+            "_updated": 1584364322
         },
         {
             "username": "zawzaw",
             "password": "123456",
+            "belong": "posts",
             "token": "20113436505432ad34dc65260fdab07afdf6ee11f9aca681e3a64be42e6da32a",
             "_updated": 1583240295
         }

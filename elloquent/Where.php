@@ -5,17 +5,17 @@ class Where{
     public $key;
     public $val;
     public $collect;
-    public $filtered;
+    public $filtered = [];
     public function __construct($collect,$key,$val){
         $this->collect = $collect;
         $this->key = $key;
         $this->val = $val;
-        $this->filtered = array_filter($collect, function ($item) use ($key,$val){
-            if (stripos($item->$key, $val) !== false) {
-                return true;
+        
+        foreach($collect as $item){
+            if($item->$key == $val){
+                array_push($this->filtered,$item);
             }
-            return false;
-        });
+        }
     }
 
     public function get(){

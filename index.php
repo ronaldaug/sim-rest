@@ -1,20 +1,17 @@
 <?php
-/**
- * Require Router
- */
 
-require 'Helper.php';
-require 'middleware/Auth.php';
-require 'Router.php';
-require 'elloquent/DB.php';
+require('App.php');
+
+use Auth;
+use Session;
+
 
 /**
  * Authentication 
  * payload must include username and password
  */
 $router->post('/auth',function($payload){
-    $auth = new Auth();
-    echo $auth->login($payload);
+    echo Auth::login($payload);
 });
 
 /**
@@ -93,7 +90,6 @@ if($auth->routes()){
 
 }
 
-
 $router->notFound(function(){
-  return Helper::response(401,"Unauthenticated.",null);
+  return Helper::response(404,"Not Found!",null);
 });

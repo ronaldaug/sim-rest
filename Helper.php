@@ -11,6 +11,6 @@ class Helper{
         if(!empty($data)){
             $response["data"] = $data;
         }
-        echo json_encode($response);
+        echo json_encode($response); exit();
     }
 }

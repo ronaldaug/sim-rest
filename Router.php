@@ -1,5 +1,6 @@
 <?php
 
+use Session;
 class Router{
     
     protected $route;
@@ -19,6 +20,8 @@ class Router{
      * @return mixed
      */
     public function get($route,$func){
+
+        $this->isExit(); 
 
         if($this->method !== 'GET'){
             return;
@@ -42,6 +45,7 @@ class Router{
 
             switch ($req_route) {
                 case $def_route :
+                Session::save("isReturn",true);
                 $func($param);
                 break;
                 default:
@@ -52,6 +56,7 @@ class Router{
 
             switch ($this->route) {
                 case $route :
+                Session::save("isReturn",true);
                     $func();
                     break;
                 default:
@@ -70,12 +75,15 @@ class Router{
     */
     public function post($route,$func){
 
+        $this->isExit(); 
+
         if($this->method !== 'POST'){
             return;
         }
         
         switch ($this->route) {
             case $route :
+                Session::save("isReturn",true);
                 $func($this->data);
                 break;
             default:
@@ -91,12 +99,15 @@ class Router{
     */
     public function put($route,$func){
 
+        $this->isExit(); 
+
         if($this->method !== 'PUT'){
             return;
         }
         
         switch ($this->route) {
             case $route :
+                Session::save("isReturn",true);
                 $func($this->data);
                 break;
             default:
@@ -113,6 +124,8 @@ class Router{
     */
     public function delete($route,$func){
 
+        $this->isExit(); 
+
         if($this->method !== 'DELETE'){
             return;
         }
@@ -124,10 +137,20 @@ class Router{
 
         switch ($req_route) {
             case $def_route :
+                Session::save("isReturn",true);
                 $func($param);
                 break;
             default:
                 break;
+        }
+    }
+
+    /**
+     * if a route is matched and retured
+     */
+    public function isExit(){
+        if(Session::has('isReturn')){
+            exit();
         }
     }
 
@@ -137,6 +160,9 @@ class Router{
     * @return mixed
     */
     public function notFound($func){
+        
+        $this->isExit(); 
+
         if($this->method !== "GET"){
             return;
         }

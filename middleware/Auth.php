@@ -1,10 +1,12 @@
 <?php
 
+use Helper;
+use Session;
 define('sim-rest', TRUE);
 
 class Auth{
 
-    public $admins;
+    public static $admins;
     public $token;
 
     public function __construct(){
@@ -49,9 +51,9 @@ class Auth{
     
     public function check($token){
 
-        $this->admins = $this->getAdmin();
+        self::$admins = self::getAdmin();
 
-        $filtered = array_filter($this->admins, function($admin) use($token){
+        $filtered = array_filter(self::$admins, function($admin) use($token){
             if($admin->token !== $token){
                 return false;
             }
@@ -65,11 +67,11 @@ class Auth{
         return true;
     }
 
-    public function login($payload){
+    public static function login($payload){
 
-        $this->admins = $this->getAdmin();
+        self::$admins = self::getAdmin();
 
-        $filtered = array_filter($this->admins, function($admin) use($payload){
+        $filtered = array_filter(self::$admins, function($admin) use($payload){
             if($admin->username !== $payload["username"] || $admin->password !== $payload["password"]){
                 return false;
             }
@@ -80,7 +82,7 @@ class Auth{
             return Helper::response(401,"Invalid username or password.",null);
         }
         
-        return Helper::response(200,"Token generated.",["token"=>$this->generateToken($payload)]);
+        return Helper::response(200,"Token generated.",["token"=>self::generateToken($payload)]);
     }
 
     public function generateToken($payload){
@@ -92,13 +94,13 @@ class Auth{
                 return $payload;
             }
             return $admin;
-        }, $this->admins);
+        }, self::$admins);
 
-        $this->appendInConfig($updatedToken);
+        self::appendInConfig($updatedToken);
         return $payload["token"];
     }
 
-    public function getAdmin(){
+    public static function getAdmin(){
         ob_start();
         require_once "database/config.php";
         $raw = ob_get_clean();
@@ -110,7 +112,7 @@ class Auth{
      * @param array
      * @return void
      */
-    public function appendInConfig($data){
+    public static function appendInConfig($data){
 
         $newData->admins = $data;
 
@@ -129,12 +131,24 @@ class Auth{
      * Protect Route with Auth
      */
     public function routes(){
+        
+        $this->isExit();
+
+        if(empty($this->token)){
+            Helper::response(400,"No token provided",null);
+        }
 
         if(!$this->check($this->token)){
-            return false;
+            Helper::response(401,"Unauthenticated",null);
         }
         
         return true;
+    }
+
+    public function isExit(){
+        if(Session::has('isReturn')){
+            exit();
+        }
     }
 
 }
