@@ -6,7 +6,11 @@ class Session{
         session_start();
     }
 
-    public static function save($key,$val){
+    public static function all(){
+        return $_SESSION;
+    }
+
+    public static function put($key,$val){
         $_SESSION[$key] = $val;
     }
 

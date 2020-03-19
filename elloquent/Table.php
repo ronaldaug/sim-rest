@@ -29,10 +29,18 @@ class Table{
     }
 
     /**
-     * Get collection
+     * Get all collection
      * @return mixed
      */
     public function all(){
+        return $this->collection;
+    }
+
+    /**
+     * Get collection
+     * @return mixed
+     */
+    public function get(){
         return $this->collection;
     }
 

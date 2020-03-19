@@ -3,54 +3,31 @@
 require('App.php');
 
 use Auth;
-use Session;
-
 
 /**
  * Authentication 
- * payload must include username and password
+ * $request_data must include username and password
  */
-$router->post('/auth',function($payload){
-    echo Auth::login($payload);
+$router->post('/auth',function($request_data){
+    echo Auth::login($request_data);
 });
 
 /**
-* Require File
+* Get the whole post collection
 */
-$router->get('/about',function(){
-  require __DIR__ . '/views/about.php';
+$router->get('/posts',function(){
+  $posts = DB::table("posts")->all();
+  echo json_encode($posts);
 });
+  
 
 /**
- * Protect routes with Auth
+ * Protected routes
  */
 if($auth->routes()){
 
           /**
-           * Return Function
-           */
-          $router->get('/',function(){
-            echo "<h1>This is home page</h1>";
-          });
-
-          /**
-          * With parameter
-          */
-          $router->get('/user/:id',function($id){
-          echo json_encode(["user_id"=>$id]);
-          });
-
-          /**
-          *  Post request 
-          *  The payload must be JSON format
-          */
-          $router->post('/', function($data){
-          echo json_encode(["data"=>$data]);
-          });
-
-
-          /**
-          * Get by Parameter
+          * Get request with :id parameter
           */
           $router->get('/posts/:id',function($id){
           $post = DB::table("posts")->where("_id",$id)->get();
@@ -58,15 +35,7 @@ if($auth->routes()){
           });
 
           /**
-          * Get all posts
-          */
-          $router->get('/posts',function(){
-          $posts = DB::table("posts")->all();
-          echo json_encode($posts);
-          });
-
-          /**
-          * Save to post
+          * Post request
           */
           $router->post('/posts',function($data){
           $post = DB::table("posts")->save($data);
