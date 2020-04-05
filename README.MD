@@ -2,7 +2,7 @@
 Sim-Rest is a very simple and lightweight JSON file based API without dependencies. 
 
 ### Features
-- Less than 100 KB (gzip)
+- Only 10 KB (gzip)
 - PHP 7+
 - Router (GET, POST, DELETE, PUT)
 - Pass parameter through router
