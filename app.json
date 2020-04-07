@@ -1,7 +1,0 @@
-{
-  "name": "sim-rest API",
-  "description": "sim-rest is a super lightweight, file-based API and it will help you build an API under a few minutes",
-  "repository": "https://github.com/ronaldaug/sim-rest",
-  "logo": "https://image.flaticon.com/icons/svg/57/57062.svg",
-  "keywords": ["simple", "restful", "api", "sim-rest", "php"]
-}
