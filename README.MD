@@ -18,5 +18,9 @@ Sim-Rest is a very simple and lightweight JSON file based API without dependenci
 ## Documentation
 [https://ronaldaug.gitbook.io/sim-rest/](https://ronaldaug.gitbook.io/sim-rest/)
 
-#### Why a new library?
-As I'm a frontend developer, I was looking for a simple API or Headless API to connect with my client side JS frameworks but Most of the them coming with many dependencies and a lot of configurations. That's why I build this simple API and hope it helps you.
+## How to make a simple todo API
+https://medium.com/@ronaldaug/php-restful-api-with-sim-rest-only-10-kb-422da0738e30
+
+--------
+
+Show your support by 🌟the project, Thanks
