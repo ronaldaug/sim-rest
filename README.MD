@@ -21,6 +21,11 @@ Sim-Rest is a very simple and lightweight JSON file based API without dependenci
 ## How to make a simple todo API
 https://medium.com/@ronaldaug/php-restful-api-with-sim-rest-only-10-kb-422da0738e30
 
+
+<a href="https://heroku.com/deploy?template=https://github.com/ronaldaug/sim-rest">
+  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
+</a>
+
 --------
 
 Show your support by 🌟the project, Thanks
