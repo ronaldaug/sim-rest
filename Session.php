@@ -10,7 +10,7 @@ class Session{
         return $_SESSION;
     }
 
-    public static function put($key,$val){
+    public static function save($key,$val){
         $_SESSION[$key] = $val;
     }
 

@@ -2,8 +2,6 @@
 
 require('App.php');
 
-use Auth;
-
 /**
  * Authentication 
  * $request_data must include username and password
