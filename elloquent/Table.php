@@ -9,9 +9,12 @@ class Table{
     public $collection;
     public $table;
     public $mapped;
+    public $limit;
 
     public function __construct($table){
         $this->table = $table;
+        $this->limit = Session::get("limit");
+        $this->sort = Session::get("sort");
         ob_start();
         require_once "database/collections/".$table.'.php';
         $raw = ob_get_clean();
@@ -33,7 +36,41 @@ class Table{
      * @return mixed
      */
     public function all(){
-        return $this->collection;
+
+        if(empty($this->collection)){
+            return [];
+        }
+
+        $filterCollection = [];
+
+        // If limit collection (?limit=)
+        if(!empty($this->limit)){
+            $filterCollection = array_slice($this->collection,0,$this->limit);
+        }
+
+        // If sort by ASC  (?sort=ASC) 
+        if($this->sort == 'ASC'){
+
+            $sortArray = !empty($filterCollection)?$filterCollection:$this->collection;
+            function sortByASC( $a, $b ) {
+                return $b->_updated - $a->_updated;
+            }    
+            usort($sortArray, "sortByASC");
+            return $sortArray;
+
+        }else{
+
+            $sortArray = !empty($filterCollection)?$filterCollection:$this->collection;
+
+            // Default sort by DESC
+            function sortByDESC($a, $b){
+                return $a->_updated - $b->_updated;
+            }
+            usort($sortArray,"sortByDESC");
+            return $sortArray;
+
+        }
+        
     }
 
     /**
@@ -168,4 +205,5 @@ class Table{
         }
 
     }
+
 }

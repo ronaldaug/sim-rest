@@ -27,6 +27,14 @@ class Router{
             return;
         }
 
+        if(isset($_GET["limit"])){
+            Session::save("limit",$_GET["limit"]);
+        }
+
+        if(isset($_GET["sort"])){
+            Session::save("sort",$_GET["sort"]);
+        }
+
         $def_routes = explode("/", $route);
 
         $req_routes = explode("/",$this->route);
@@ -54,8 +62,20 @@ class Router{
 
         }else{
 
-            switch ($this->route) {
-                case $route :
+            
+            // if include parameter ?limit=...
+
+            $param_routes = null;
+            if(strpos($req_routes[1],'?')){
+                $param_routes = explode("?",$req_routes[1]);
+            }
+
+            $def_route = $def_routes[1];
+            $req_route = $req_routes[1];
+            $checkRoute = !empty($param_routes)?$param_routes[0]:$req_route;
+
+            switch ($checkRoute) {
+                case $def_route :
                 Session::save("isReturn",true);
                     $func();
                     break;
