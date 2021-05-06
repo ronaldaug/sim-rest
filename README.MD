@@ -15,6 +15,51 @@ Sim-Rest is super lightweight REST API written in PHP.
 - Less configuration
 - Zero dependencies
 
+---------
+
+## Only 3 steps to make your json file to fully functional REST API with JWT token auth.
+
+#### 1 
+Add your JSON data under `database/collections` folder. (There are two sample json dbs called `posts` and `cars`)
+
+#### 2
+Change username and password or add new users in `database/config.php` file. 
+
+#### 3
+Delare routes inside main `index.php`
+
+Examples
+
+**Public Route**
+```php
+
+  $router->get('/posts',function(){
+      $posts = DB::table("posts")->all();
+      echo json_encode($posts);
+  });
+  
+```
+
+**Protected Route**
+```php
+if($auth->routes()){
+
+  $router->get('/posts',function(){
+      $posts = DB::table("posts")->all();
+      echo json_encode($posts);
+  });
+  
+}
+```
+
+> Here, you'll see the database queries but most are very similar with Laravel eloquent.
+
+------- 
+
+That's it, just upload on hosting or serve via xampp/mamp and you're ready to fetch data via REST API.
+
+Still don't understand, please check the documentation and example of todo API below.
+
 ## Documentation
 [https://ronaldaug.gitbook.io/sim-rest/](https://ronaldaug.gitbook.io/sim-rest/)
 
