@@ -58,7 +58,7 @@ if($auth->routes()){
 
 That's it, just upload on hosting or serve via xampp/mamp and you're ready to fetch data via REST API.
 
-Still don't understand, please check the documentation and example of todo API below.
+Still don't get it? please check the documentation and example of todo API below.
 
 ## Documentation
 [https://ronaldaug.gitbook.io/sim-rest/](https://ronaldaug.gitbook.io/sim-rest/)
