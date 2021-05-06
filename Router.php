@@ -34,6 +34,10 @@ class Router{
             Session::save("sort",$_GET["sort"]);
         }
 
+        if(isset($_GET["only"])){
+            Session::save("only",$_GET["only"]);
+        }
+
         $def_routes = explode("/", $route);
 
         $req_routes = explode("/",$this->route);
