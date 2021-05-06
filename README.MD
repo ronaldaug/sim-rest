@@ -1,5 +1,5 @@
 # Sim-Rest 
-Sim-Rest is super lightweight REST API written in PHP.
+Sim-Rest is super lightweight tool that can serve your JSON file as a fully functional RESTFUL API. 
 
 <img src="https://user-images.githubusercontent.com/33022876/78574189-a8534380-784f-11ea-9712-47241dbf40d7.png" width="60%">
 
