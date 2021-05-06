@@ -1,8 +1,7 @@
 <?php
 
-use Session;
 class Router{
-    
+
     protected $route;
     protected $method;
     protected $data;
@@ -15,13 +14,13 @@ class Router{
 
     /**
      * GET request
-     * @param route 
+     * @param route
      * @param func
      * @return mixed
      */
     public function get($route,$func){
 
-        $this->isExit(); 
+        $this->isExit();
 
         if($this->method !== 'GET'){
             return;
@@ -62,7 +61,7 @@ class Router{
 
         }else{
 
-            
+
             // if include parameter ?limit=...
 
             $param_routes = null;
@@ -82,25 +81,25 @@ class Router{
                 default:
                     break;
             }
-            
+
         }
 
     }
 
     /**
     * POST request
-    * @param route 
+    * @param route
     * @param func
     * @return mixed
     */
     public function post($route,$func){
 
-        $this->isExit(); 
+        $this->isExit();
 
         if($this->method !== 'POST'){
             return;
         }
-        
+
         switch ($this->route) {
             case $route :
                 Session::save("isReturn",true);
@@ -113,18 +112,18 @@ class Router{
 
     /**
     * POST request
-    * @param route 
+    * @param route
     * @param func
     * @return mixed
     */
     public function put($route,$func){
 
-        $this->isExit(); 
+        $this->isExit();
 
         if($this->method !== 'PUT'){
             return;
         }
-        
+
         switch ($this->route) {
             case $route :
                 Session::save("isReturn",true);
@@ -138,13 +137,13 @@ class Router{
 
     /**
     * Delete request
-    * @param route 
+    * @param route
     * @param func
     * @return mixed
     */
     public function delete($route,$func){
 
-        $this->isExit(); 
+        $this->isExit();
 
         if($this->method !== 'DELETE'){
             return;
@@ -180,8 +179,8 @@ class Router{
     * @return mixed
     */
     public function notFound($func){
-        
-        $this->isExit(); 
+
+        $this->isExit();
 
         if($this->method !== "GET"){
             return;
@@ -193,7 +192,7 @@ class Router{
     }
 }
 
-/** 
+/**
  * Route Request and Methods
  */
 $req = ["method" => $_SERVER['REQUEST_METHOD'],"route" => $_SERVER['REQUEST_URI'], "data"=>json_decode(file_get_contents('php://input'), true)];

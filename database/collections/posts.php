@@ -1,5 +1,5 @@
-<?php 
-        if(!defined('sim-rest')){ exit;}         
+<?php
+        if(!defined('sim-rest')){ exit;}
         header('Content-Type: application/json');
 ?>
 

@@ -1,7 +1,5 @@
 <?php
 
-define('sim-rest', TRUE);
-
 require('Where.php');
 
 class Table{
@@ -48,13 +46,13 @@ class Table{
             $filterCollection = array_slice($this->collection,0,$this->limit);
         }
 
-        // If sort by ASC  (?sort=ASC) 
+        // If sort by ASC  (?sort=ASC)
         if($this->sort == 'ASC'){
 
             $sortArray = !empty($filterCollection)?$filterCollection:$this->collection;
             function sortByASC( $a, $b ) {
                 return $b->_updated - $a->_updated;
-            }    
+            }
             usort($sortArray, "sortByASC");
             return $sortArray;
 
@@ -70,7 +68,7 @@ class Table{
             return $sortArray;
 
         }
-        
+
     }
 
     /**
@@ -95,7 +93,7 @@ class Table{
             return $this->update($id,$data);
         }else{
             return $this->update($this->uuid(),$data);
-        }  
+        }
     }
 
     /**
@@ -107,7 +105,7 @@ class Table{
     public function update($id,$data){
 
         if($this->isIdExit($id,$this->collection) == true){
-            
+
             $this->mapped = array_map(function ($item) use ($id,$data) {
                 if($item->_id == $id){
                     $data["_updated"] = time();
@@ -127,7 +125,7 @@ class Table{
             array_push($this->collection,$data);
 
         }
-    
+
         $content = !empty($this->mapped)?$this->mapped:$this->collection;
 
         $this->appendInCollection($content);
@@ -145,8 +143,8 @@ class Table{
         $newData->$collname = $data;
 
         // Append array
-        $head = "<?php 
-        if(!defined('sim-rest')){ exit;}         
+        $head = "<?php
+        if(!defined('sim-rest')){ exit;}
         header('Content-Type: application/json');
 ?>";
 
@@ -166,7 +164,7 @@ class Table{
      * If id Exit in array
      * @param id
      * @param content
-     * @return Boolean 
+     * @return Boolean
      */
     public function isIdExit($id,$content){
         $data = array_filter($content, function ($item) use ($id) {

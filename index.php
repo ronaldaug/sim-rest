@@ -3,7 +3,7 @@
 require('App.php');
 
 /**
- * Authentication 
+ * Authentication
  * $request_data must include username and password
  */
 $router->post('/auth',function($request_data){
@@ -17,20 +17,19 @@ $router->get('/posts',function(){
   $posts = DB::table("posts")->all();
   echo json_encode($posts);
 });
-  
+
+/**
+* Get request with :id parameter
+*/
+$router->get('/posts/:id',function($id){
+$post = DB::table("posts")->where("_id",$id)->get();
+echo json_encode($post);
+});
 
 /**
  * Protected routes
  */
 if($auth->routes()){
-
-          /**
-          * Get request with :id parameter
-          */
-          $router->get('/posts/:id',function($id){
-          $post = DB::table("posts")->where("_id",$id)->get();
-          echo json_encode($post);
-          });
 
           /**
           * Post request

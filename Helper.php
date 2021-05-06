@@ -1,7 +1,7 @@
 <?php
 
 class Helper{
-    public function response($code,$msg,$data = null){
+    public static function response($code,$msg,$data = null){
         http_response_code($code);
         $response = [
             "status"=>$code,

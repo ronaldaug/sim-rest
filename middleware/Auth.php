@@ -1,7 +1,5 @@
 <?php
 
-use Helper;
-use Session;
 define('sim-rest', TRUE);
 
 class Auth{
@@ -13,7 +11,7 @@ class Auth{
         $this->token = $this->getBearerToken();
     }
 
-    /** 
+    /**
      * Get header Authorization
      * */
     function getAuthorizationHeader(){
@@ -48,7 +46,7 @@ class Auth{
     }
     return null;
     }
-    
+
     public function check($token){
 
         self::$admins = self::getAdmin();
@@ -59,7 +57,7 @@ class Auth{
             }
             return true;
         });
-        
+
         if(empty($filtered)){
             return false;
         }
@@ -81,7 +79,7 @@ class Auth{
         if(empty($filtered)){
             return Helper::response(401,"Invalid username or password.",null);
         }
-        
+
         return Helper::response(200,"Token generated.",["token"=>self::generateToken($payload)]);
     }
 
@@ -117,8 +115,8 @@ class Auth{
         $newData->admins = $data;
 
         // Append array
-        $head = "<?php 
-        if(!defined('sim-rest')){ exit;}         
+        $head = "<?php
+        if(!defined('sim-rest')){ exit;}
         header('Content-Type: application/json');
 ?>";
 
@@ -131,7 +129,7 @@ class Auth{
      * Protect Route with Auth
      */
     public function routes(){
-        
+
         $this->isExit();
 
         if(empty($this->token)){
@@ -141,7 +139,7 @@ class Auth{
         if(!$this->check($this->token)){
             Helper::response(401,"Unauthenticated",null);
         }
-        
+
         return true;
     }
 

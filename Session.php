@@ -15,7 +15,7 @@ class Session{
     }
 
     public static function get($key){
-       return $_SESSION[$key];
+       return isset($_SESSION[$key])?$_SESSION[$key]:'';
     }
 
     public static function forget($key){
