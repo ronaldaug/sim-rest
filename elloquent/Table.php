@@ -183,8 +183,8 @@ class Table
      */
     public function getKeys($keys, $collections)
     {
-        $keysArray = strpos(",", $keys)?explode(",", $keys):[$keys];
-        $filtered = [];
+        $keysArray = strpos($keys, ",") !== false?explode(",", $keys):[$keys];
+        $filtered  = [];
         foreach ($collections as $col) {
             $newObj = new stdClass();
             foreach ($col as $key => $val) {
